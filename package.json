@@ -1,0 +1,23 @@
+{
+  "name": "projeto-treino",
+  "version": "1.0.0",
+  "description": "Projeto para treinamento de Node.js",
+  "homepage": "https://github.com/wesleyafonsogomes/projeto-treino#readme",
+  "bugs": {
+    "url": "https://github.com/wesleyafonsogomes/projeto-treino/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wesleyafonsogomes/projeto-treino.git"
+  },
+  "license": "ISC",
+  "author": "Wesley Afonso",
+  "type": "commonjs",
+  "main": "treino-express.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
