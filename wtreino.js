@@ -54,3 +54,36 @@ async function testarNumero(num) {
         console.log("Erro: ", err);
     }
 }
+
+// Refazer 2.1b (carros classicos);
+
+const carrosClassicos = [
+    { id: 1, modelo: "Opala SS", marca: "Chevrolet", ano: 1976, preco: 120000 },
+    { id: 2, modelo: "Maverick GT", marca: "Ford", ano: 1974, preco: 150000 },
+    { id: 3, modelo: "Fusca 1300", marca: "Volkswagen", ano: 1972, preco: 45000 },
+    { id: 4, modelo: "Dodge Charger R/T", marca: "Dodge", ano: 1969, preco: 280000 }
+];
+
+function buscarCarroClassico(id) {
+    return new Promise((resolve, reject) => {
+        
+        setTimeout(() => {
+            const buscarCarro = carrosClassicos.find(carro => carro.id === id);
+            if(buscarCarro) {
+                resolve(`ID: ${buscarCarro.id} Modelo: ${buscarCarro.modelo} Marca: ${buscarCarro.marca} Ano: ${buscarCarro.ano} Preço: ${buscarCarro.preco}`);
+            } else {
+                reject(new Error("Carro não encontrado!"));
+            }
+        }, 1500)
+    });
+}
+async function executarCarroClassico(id) {
+    try {
+        const msg = await buscarCarroClassico(id);
+        console.log("Buscando carro...");
+        console.log(msg);
+    } catch(err) {
+        console.log("Erro: ", err);
+    }
+}
+executarCarroClassico(2);
