@@ -168,9 +168,118 @@ async function mostrarCarro(id) {
     }
 }
 
-// array de preços de carros 
+// IA 1
 
-const precos = [45000, 120000, 150000, 85000, 200000];
+async function iniciar() {
+    minhaPromise = new Promise((resolve, reject) => {
+            setTimeout(() => {
+            resolve("Carregado!");
+        }, 1000)
+    });
+    const msg = await minhaPromise;
+    console.log(msg);
+};
+
+// IA 2
+
+async function carregar() {
+    const promessa = new Promise((resolve, reject) => {
+        setTimeout(() => {
+            const aleatorio = Math.random();
+            if(aleatorio > 0.5) {
+                resolve("Sucesso ao carregar: N > 1.5");
+            } else {
+                reject("Falha ao carregar dados: N <= 1.5");
+            }
+        }, 1500)
+    });
+    try {       
+        const msg = await promessa;
+        console.log(msg);
+    } catch(err) {
+        console.log("Erro:", err);
+    }
+}
+
+
+// IA 3 - duas promises em sequencia 
+
+async function inicializar() {
+    const verificarToken = new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve("Token válido");
+        }, 1000)
+    });
+    const carregarDados = new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve("Dados carregados");
+        }, 2000)
+    });
+    console.log("Validando token...");
+    const msg1 = await verificarToken;
+    console.log(msg1);
+    const msg2 = await carregarDados;
+    console.log(msg2);
+    console.log("Sistema pronto");
+}
+
+// processar uma lista de usuarios com delay
+
+const lista = ["Ana", "Carlos", "Julia", "Marcos"];
+
+async function processarUsuario(usuarios) {
+    const resultado = [];
+    const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
+    for (const user of usuarios) {
+    await delay(500);
+    console.log("Processando: ", user);
+    resultado.push(`Processado: ${user}`);  
+    }  
+    return resultado;
+}
+
+// validar um usuario e carregar seu perfil 
+
+const usuarios = [{nome: "Ana", idade: 21},{nome: "Wesley", idade: 29}];
+
+async function login(nome) {
+
+    const usuarioEncontrado = usuarios.find(u => u.nome === nome);
+
+    const validacao = new Promise((resolve, reject)=> {
+        setTimeout(()=> {
+            
+            if(!usuarioEncontrado) {
+                reject("Usuário não existe!");
+            } else if(usuarioEncontrado.nome === "Ana") {
+                reject("Usuário bloquado!");
+            } else {
+                resolve("Usuário válido!");
+            }
+        }, 1000)
+    });
+    const carregandoPerfil = new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve(`Usuário carregado: Nome: ${usuarioEncontrado.nome}, idade: ${usuarioEncontrado.idade}`);
+        }, 2000)
+    });
+    try {
+        console.log("Validando usuário");
+        const msg1 = await validacao;
+        console.log(msg1);
+
+        console.log("Carregando perfil...");
+        const msg2 = await carregandoPerfil;
+        console.log(msg2);
+    } catch(err) {
+        console.log("Erro: ", err);
+    }
+}
+login("Wesley");
+
+
+
 
 
 
