@@ -30,9 +30,18 @@ app.get("/carros", async (req,res) => {
     }
 })
 
-app.get("/carros/id/:id", (req,res) => Carro.findOne({
+app.get("/carros/id/:id", async (req,res) => {  
+    console.log("Isso são os parâmetros:", req.params);
+    const ret =  await Carro.findOne ({
     where: {id: req.params.id}
     })
+    const r1 = ret.toJSON();
+    console.log("Este são os dados do carro presente no banco de dados: ", ret);
+    console.log("Isso é o valor de r1: ", r1);
+    res.send(ret);
+    return ret;
+
+    /*
     .then(carro => {
         if(!carro) {
             return res.status(404).send({ erro: "Carro não encontrado!"});
@@ -43,6 +52,8 @@ app.get("/carros/id/:id", (req,res) => Carro.findOne({
     .catch(err => {
         res.status(500).send({ erro: "Erro no servidor", detalhes: err});
     })
+    */
+    }
 );
 
 app.get("/carros/marca/:marca", async (req,res) => {
